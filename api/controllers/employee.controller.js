@@ -29,15 +29,27 @@ router.get('/:id', validateDbId, (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
+  const newRecord = {
+    fullName: req.body.fullName,
+    position: req.body.position,
+    location: req.body.location,
+    salary: req.body.salary,
+  };
   employeeCrud
-    .create(req.body)
+    .create(newRecord)
     .then((data) => res.status(201).json(data))
     .catch((err) => next(err));
 });
 
 router.put('/:id', validateDbId, (req, res, next) => {
+  const updatedRecord = {
+    fullName: req.body.fullName,
+    position: req.body.position,
+    location: req.body.location,
+    salary: req.body.salary,
+  };
   employeeCrud
-    .update(req.params.id, req.body)
+    .update(req.params.id, updatedRecord)
     .then((data) => {
       if (data) {
         res.send(data);
